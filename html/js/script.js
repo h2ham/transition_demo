@@ -17,6 +17,11 @@ CSSNITESAP = function () {
 
       self.setJSONImage(url, source, $('#gallery'));
 
+      $(document).on('click', '.mod-cloud span', function (e) {
+        e.preventDefault();
+        self.smoothScroll(this.hash);
+      });
+
       return this;
     },
 
@@ -24,6 +29,15 @@ CSSNITESAP = function () {
       $.getJSON(url, function(json) {
         $elem.html(source(json));
       });
+    },
+
+    smoothScroll: function(options) {
+      var c = $.extend({
+        speed : 650,
+        easing : 'swing'
+      }, options);
+
+      $('html,body').animate({scrollTop: 0}, c.speed, c.easing);
     }
   };
 

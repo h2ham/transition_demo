@@ -145,6 +145,30 @@ ul {
   }
 }
 
+.mod-cloud {
+  position: fixed;
+  bottom: 400px;
+  right: 50px;
+  z-index: 10;
+}
+
 .is-hidden {
   display: none !important;
+}
+
+.animation-demo {
+  font-size: 7em;
+  color: #00bfff;
+  text-align: center;
+  margin: 0;
+  animation-duration: 2s;
+  animation-name: cloud;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes cloud {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(200px); }
 }

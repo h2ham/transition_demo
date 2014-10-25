@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>DEMO</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -11,11 +12,22 @@
       <h1 class="mod-main-heading">Gallery Sample</h1>
     </div>
     <div class="l-main">
-      <input type="radio" class="mod-filter" name="filter" id="f1" checked="checked">
+      <input type="radio" class="mod-filter" name="filter" id="f1">
+      <input type="radio" class="mod-filter" name="filter" id="f2">
+      <input type="radio" class="mod-filter" name="filter" id="f3" checked="checked">
+      <input type="radio" class="mod-filter" name="filter" id="f4">
       <ul id="gallery" class="mod-gallery">
 
       </ul>
     </div>
+  </div>
+  <div class="mod-cloud">
+    <p class="animation-demo">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-cloud fa-stack-2x"></i>
+        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+      </span>
+    </p>
   </div>
 <script id="gallery-template" type="text/x-handlebars-template">
 {{#each photos.photo}}
