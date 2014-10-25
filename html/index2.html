@@ -12,7 +12,13 @@
     </div>
     <div class="l-main">
       <input type="radio" class="mod-filter" name="filter" id="f1" checked="checked">
-      <label class="mod-button is-hidden" for="f1">20</label>
+      <input type="radio" class="mod-filter" name="filter" id="f2">
+      <input type="radio" class="mod-filter" name="filter" id="f3">
+      <input type="radio" class="mod-filter" name="filter" id="f4">
+      <label class="mod-button" for="f1">20</label>
+      <label class="mod-button" for="f2">40</label>
+      <label class="mod-button" for="f3">ALL</label>
+      <label class="mod-button" for="f4">NONE</label>
       <ul id="gallery" class="mod-gallery">
 
       </ul>
@@ -20,9 +26,12 @@
   </div>
 <script id="gallery-template" type="text/x-handlebars-template">
 {{#each photos.photo}}
-  <li class="mod-gallery__item type1">
+  <li class="mod-gallery__item type2">
     <a href="https://www.flickr.com/photos/{{owner}}/{{id}}" target="_blank" class="mod-gallery__image">
       <div class="mod-gallery__imageblock" style="background-image: url({{url_z}});"></div>
+      <div class="mod-gallery__textblock">
+        <span class="mod-gallery__text">{{title}}</span>
+      </div>
     </a>
   </li>
 {{/each}}

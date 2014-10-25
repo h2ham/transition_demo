@@ -20,7 +20,11 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 gulp.task('jshint', function () {
-  return gulp.src('_resource/js/**/*.js')
+  return gulp.src([
+      '_resource/js/**/*.js',
+      '!_resource/js/jquery-1.11.1.min.js',
+      '!_resource/js/handlebars-v2.0.0.js'
+    ])
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
@@ -33,16 +37,17 @@ gulp.task('images', function () {
       progressive: true,
       interlaced: true
     })))
-    .pipe(gulp.dest('htdocs/img'))
+    .pipe(gulp.dest('html/img'))
     .pipe($.size({title: 'img'}));
 });
 
 gulp.task('copy', function () {
   return gulp.src([
-    '_resource/*'
+    '_resource/**/*',
+    '!_resource/**/*.scss'
   ], {
     dot: true
-  }).pipe(gulp.dest('htdocs'))
+  }).pipe(gulp.dest('html'))
     .pipe($.size({title: 'copy'}));
 });
 
@@ -51,19 +56,19 @@ gulp.task('styles', function () {
       '_resource/css/**/*.scss',
       '_resource/css/**/*.css'
     ])
-    .pipe($.sass()
+    .pipe($.sass({errLogToConsole: true})
       .on('error', console.error.bind(console))
     )
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.if('*.css', $.cssbeautify()))
     .pipe($.if('*.css', $.csscomb()))
     .pipe($.if('*.css', $.csso()))
-    .pipe(gulp.dest('htdocs/css'))
+    .pipe(gulp.dest('html/css'))
     .pipe($.size({title: 'css'}));
 });
 
 gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: '{htdocs, _resource}'});
+  var assets = $.useref.assets({searchPath: '{html, _resource}'});
 
   return gulp.src(['_resource/**/*.html'])
     .pipe(assets)
@@ -77,28 +82,28 @@ gulp.task('html', function () {
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.if('*.html', $.minifyHtml()))
-    .pipe(gulp.dest('htdocs'))
+    .pipe(gulp.dest('html'))
     .pipe($.size({title: 'html'}));
 });
 
-gulp.task('clean', del.bind(null, ['htdocs']));
+gulp.task('clean', del.bind(null, ['html']));
 
 gulp.task('server', ['styles', 'html', 'copy'], function () {
   browserSync({
     notify: false,
-    server: ['htdocs']
+    server: ['html']
   });
 
   gulp.watch(['_resource/**/*.html'], ['html', reload]);
   gulp.watch(['_resource/css/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['_resource/js/**/*.js'], ['jshint']);
+  gulp.watch(['_resource/js/**/*.js'], ['jshint', 'copy', reload]);
   gulp.watch(['_resource/img/**/*'], reload);
 });
 
 gulp.task('server:dist', ['default'], function () {
   browserSync({
     notify: false,
-    server: 'htdocs'
+    server: 'html'
   });
 });
 

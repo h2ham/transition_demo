@@ -1,3 +1,150 @@
 @charset "utf-8";
 
-@import 'normalize';
+@import 'pure-min';
+
+// base
+
+body {
+  background-color: #ecf0f1;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.l-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 10px;
+  background-color: #34495e;
+  color: #fff;
+  z-index: 1;
+  h1 {
+    max-width: 1024px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+.l-main {
+  padding: 105px 0 15px;
+}
+
+.mod-filter {
+  display: none;
+  @for $i from 1 through 4 {
+    &:nth-of-type(#{$i}):checked {
+      ~ .mod-button:nth-of-type(#{$i}) {
+        background-color: #16a085;
+        color: #fff;
+      }
+    }
+  }
+  @for $i from 1 through 3 {
+    &:nth-of-type(#{$i}):checked {
+      ~ .mod-gallery li:nth-of-type(n + #{$i * 20 + 1}) {
+        width: 0;
+        height: 0;
+        border: 0;
+        opacity: 0;
+      }
+    }
+  }
+  &:nth-of-type(4):checked ~ .mod-gallery li {
+    width: 0;
+    height: 0;
+    border: 0;
+    opacity: 0;
+  }
+}
+
+.mod-button {
+  position: fixed;
+  top: 20px;
+  width: 80px;
+  padding: 10px 0;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  z-index: 2;
+  @for $i from 1 through 4 {
+    &:nth-of-type(#{$i}) {
+      right: 500px - $i * 100px;
+    }
+  }
+}
+
+.mod-gallery {
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: hidden;
+  &__item {
+    float: left;
+    width: 240px;
+    height: 160px;
+    margin: 5px;
+    border: 3px solid #7f8c8d;
+    overflow: hidden;
+    transition: 1s;
+    opacity: 1;
+
+    &.type1 {
+      .mod-gallery__imageblock {
+        transition: 1s;
+      }
+      &:hover {
+      .mod-gallery__imageblock {
+          opacity: .2;
+        }
+      }
+    }
+    &.type2 {
+      .mod-gallery__imageblock {
+        transition: .3s;
+      }
+      &:hover {
+      .mod-gallery__imageblock {
+          transform: scale(1.2, 1.2);
+        }
+        .mod-gallery__textblock {
+          bottom: 0;
+        }
+      }
+    }
+  }
+  &__image {
+    position: relative;
+    display: block;
+  }
+  &__imageblock {
+    width: 240px;
+    height: 160px;
+    background-size: 240px;
+    background-position: center center;
+  }
+  &__textblock {
+    width: 240px;
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    bottom: -44px;
+    transition: .3s;
+  }
+  &__text {
+    display: block;
+    padding: 10px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+.is-hidden {
+  display: none !important;
+}
