@@ -12,7 +12,7 @@ CSSNITESAP = function () {
   CSSNITESAP.prototype = {
     init: function () {
       var self = this,
-          url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=9ea117055f8b666dcdf497d6625aa5dd&text=danbo&extras=url_z&per_page=60&format=json&jsoncallback=?',
+          url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=aae634c2226a85c177bc77c747a29d45&text=danbo&extras=url_z&per_page=60&format=json&jsoncallback=?',
           source = Handlebars.compile($('#gallery-template').html());
 
       self.setJSONImage(url, source, $('#gallery'));
