@@ -145,11 +145,22 @@ ul {
   }
 }
 
+.mod-fb-gallery {
+  &__item {
+    overflow: hidden;
+  }
+  &__image {
+    max-width: 100%;
+    vertical-align: bottom;
+  }
+}
+
 .mod-cloud {
   position: fixed;
   bottom: 400px;
   right: 50px;
   z-index: 10;
+  cursor: pointer;
 }
 
 .is-hidden {
