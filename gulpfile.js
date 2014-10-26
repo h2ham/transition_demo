@@ -23,6 +23,7 @@ gulp.task('jshint', function () {
   return gulp.src([
       '_resource/js/**/*.js',
       '!_resource/js/jquery-1.11.1.min.js',
+      '!_resource/js/masonry.pkgd.min.js',
       '!_resource/js/handlebars-v2.0.0.js'
     ])
     .pipe(reload({stream: true, once: true}))

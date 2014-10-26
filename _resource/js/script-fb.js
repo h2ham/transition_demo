@@ -32,8 +32,17 @@ CSSNITESAP = function () {
         cache: false,
         dataType: 'jsonp',
         success: function(json){
-          console.log(json);
           $elem.html(source(json));
+          $.getJSON(url, function(json) {
+            $elem.html(source(json));
+            $.each(json.data, function () {
+              $('<img src="'+this.images[2].source+'">').on('load', function () {
+                $('.mod-fb-gallery').masonry({
+                  itemSelector: '.mod-fb-gallery__item'
+                });
+              });
+            });
+          });
         }
       });
     },
