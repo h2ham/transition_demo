@@ -63,7 +63,7 @@ gulp.task('styles', function () {
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.if('*.css', $.cssbeautify()))
     .pipe($.if('*.css', $.csscomb()))
-    .pipe($.if('*.css', $.csso()))
+    // .pipe($.if('*.css', $.csso()))
     .pipe(gulp.dest('html/css'))
     .pipe($.size({title: 'css'}));
 });

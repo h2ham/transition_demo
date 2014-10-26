@@ -4,23 +4,6 @@
   <meta charset="UTF-8">
   <title>Perform</title>
   <link rel="stylesheet" href="css/style.css">
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '718325438221385',
-        xfbml      : true,
-        version    : 'v2.1'
-      });
-    };
-
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  </script>
 </head>
 <body>
   <div class="l-wrap">
@@ -34,9 +17,11 @@
     </div>
   </div>
 <script id="gallery-template" type="text/x-handlebars-template">
-{{#each data}}
-  <li class="mod-fb-gallery__item pure-u-1-3"><a href="{{link}}" target="_blank"><img src="{{images.2.source}}" alt="{{place.name}}" class="mod-fb-gallery__image"></a>
+{{#each photos.photo}}
+{{#if url_z}}
+  <li class="mod-fb-gallery__item pure-u-1-3"><a href="https://www.flickr.com/photos/{{owner}}/{{id}}" target="_blank"><img src="{{url_z}}" alt="{{title}}" class="mod-fb-gallery__image"></a>
   </li>
+{{/if}}
 {{/each}}
 </script>
 <script src="js/jquery-1.11.1.min.js"></script>

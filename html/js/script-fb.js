@@ -12,7 +12,7 @@ CSSNITESAP = function () {
   CSSNITESAP.prototype = {
     init: function () {
       var self = this,
-          url = 'https://graph.facebook.com/693499280723474/photos/limit=20?access_token=CAACEdEose0cBAFB90MOt0ek7ZAeaiBNAsVT0GdURGxW9brm7T2uiKN3d6uGoJotEhhgxpWopNhw2wXcQkkTwfKwTPOCSPEZCHPC6brURujluZCZAzJDBkYvKB276RJCNWXbnWj7v60Pmka3zXFpJIIIzme26PBkaQdaK4x2G8urSZBPusvasOF4sUgwERB3fKv95LXJPcaMszEZCkklr1a',
+          url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=aae634c2226a85c177bc77c747a29d45&sort=relevance&text=laugh%20cat&extras=url_z&per_page=40&format=json&jsoncallback=?',
           source = Handlebars.compile($('#gallery-template').html());
 
       self.setJSONImage(url, source, $('#gallery'));
@@ -26,24 +26,15 @@ CSSNITESAP = function () {
     },
 
     setJSONImage: function (url, source, $elem) {
-      $.ajax({
-        type: 'get',
-        url: url,
-        cache: false,
-        dataType: 'jsonp',
-        success: function(json){
-          $elem.html(source(json));
-          $.getJSON(url, function(json) {
-            $elem.html(source(json));
-            $.each(json.data, function () {
-              $('<img src="'+this.images[2].source+'">').on('load', function () {
-                $('.mod-fb-gallery').masonry({
-                  itemSelector: '.mod-fb-gallery__item'
-                });
-              });
+      $.getJSON(url, function(json) {
+        $elem.html(source(json));
+        $.each(json.photos.photo, function () {
+          $('<img src="' + this.url_z + '">').on('load', function () {
+            $('.mod-fb-gallery').masonry({
+              itemSelector: '.mod-fb-gallery__item'
             });
           });
-        }
+        });
       });
     },
 
