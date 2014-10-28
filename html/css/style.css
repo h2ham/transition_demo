@@ -1269,6 +1269,14 @@ ul {
 .mod-fb-gallery__image {
   max-width: 100%;
   vertical-align: bottom;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.mod-fb-gallery__image:hover {
+  -webkit-transform: scale(2, 2);
+  -ms-transform: scale(2, 2);
+  transform: scale(2, 2);
 }
 
 .mod-cloud {
